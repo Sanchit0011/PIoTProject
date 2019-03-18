@@ -1,0 +1,1 @@
+#The file contains code to insert the read values to the database
