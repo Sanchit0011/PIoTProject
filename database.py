@@ -1,4 +1,4 @@
-# The file contains code to insert the values read from the sense hat to the database
+# The file contains code to insert the values read to the database
 import sqlite3
 
 
