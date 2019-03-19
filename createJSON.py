@@ -1,5 +1,5 @@
 import json
-import requests
+
 
 class createJSON:
     ranges = {
@@ -7,16 +7,14 @@ class createJSON:
         "max-temperature": 30,
         "min-humidity": 50,
         "max-humidity": 60
-        
+
         }
-    
-    def create_JSON(self,path,fileName):
+
+    def create_JSON(self, path, fileName):
         filePath = path + '/' + fileName + '.json'
         with open(filePath, "w") as fp:
-            json.dump(self.ranges, fp, indent= 4)
-        
+            json.dump(self.ranges, fp, indent=4)
+
+
 x = createJSON()
 x.create_JSON("C:/Users/sanch/PIoT_Assignment", "config")
-
-
-    
