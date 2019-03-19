@@ -13,7 +13,7 @@ class createJSON:
     def create_JSON(self,path,fileName):
         filePath = path + '/' + fileName + '.json'
         with open(filePath, "w") as fp:
-            json.dump(self.ranges, fp)
+            json.dump(self.ranges, fp, indent= 4)
         
 x = createJSON()
 x.create_JSON("C:/Users/sanch/PIoT_Assignment", "config")
