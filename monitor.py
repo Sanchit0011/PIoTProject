@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from sense_hat import SenseHat
 
 # Defined monitor class
@@ -14,7 +15,7 @@ class monitor:
 
     # Function to get current time
     def getTime(self):
-        date = datetime.datetime.now()
+        date = datetime.now()
         return(date)
 
     # Function to get current cpu temperature
