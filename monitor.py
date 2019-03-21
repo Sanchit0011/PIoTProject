@@ -1,3 +1,6 @@
+# The file contains code to get current temp, humidity, time
+
+# Imported the necessary modules
 import os
 from datetime import datetime
 from sense_hat import SenseHat
