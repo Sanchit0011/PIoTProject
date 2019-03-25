@@ -1,5 +1,3 @@
-# The file contains code to call insert_table function
-
 # Imported the necessary module
 from database import database
 
@@ -8,10 +6,13 @@ from database import database
 
 class monitorAndNotify:
 
-    # Function to call insert_table in database class
+    # Function to call insert_table in database file
     def init_insert(self):
         db = database()
-        # db.create_table()
+
+        # Only if table does not exist
+        db.create_table()
+
         db.insert_table()
 
 # Created object to call init_insert
