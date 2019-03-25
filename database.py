@@ -17,7 +17,7 @@ class database:
         path2 = os.path.basename(__file__)
         rel_path = path1.replace(path2, "")
 
-        conn = sqlite3.connect(rel_path+'PIoT_db.db')
+        conn = sqlite3.connect(rel_path + 'PIoT_db.db')
         return(conn)
 
     # Function to create readings table if it does not exist
