@@ -15,150 +15,70 @@ class createReport:
 
     # Function to create csv file containing reading status for each day
     def create_csv(self):
+
+        # Created database object and connected to database
         db = database()
         conn = db.create_conn()
 
+        # Defined relative path
         path1 = os.path.realpath(__file__)
         path2 = os.path.basename(__file__)
         rel_path = path1.replace(path2, "")
 
+        # Loaded config.json file
         with open(rel_path + 'config.json', 'r') as f:
             config = json.load(f)
 
+        # Got min, max temp, humidity from database and stored in dataframe
         data = pd.read_sql_query('''SELECT DATE, MIN(TEMP), MAX(TEMP), MIN(HUMIDITY),
         MAX(HUMIDITY) FROM READINGS GROUP BY DATE''', conn)
+
         csv_content = []
-        comment = ""
 
+        # Looped through dataframe and checked if readings are out of range
+        # Created csv file based on readings status
         for i in range(0, len(data)):
-            if data["MIN(HUMIDITY)"][i] < config['min-humidity']:
-                if data["MIN(TEMP)"][i] < config['min-temperature']:
-                    diff1 = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
-                    diff2 = config['min-temperature'] - data["MIN(TEMP)"][i]
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C below minimum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% below minimum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-                elif data["MAX(TEMP)"][i] > config['max-temperature']:
-                    diff1 = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
-                    diff2 = data["MAX(TEMP)"][i] - config['max-temperature']
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C above maximum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% below minimum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-            elif data["MAX(HUMIDITY)"][i] > config['max-humidity']:
-                if data["MIN(TEMP)"][i] < config['min-temperature']:
-                    diff1 = data["MAX(HUMIDITY)"][i] - config['max-humidity']
-                    diff2 = config['min-temperature'] - data["MIN(TEMP)"][i]
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C below minimum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% above maximum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-                elif data["MAX(TEMP)"][i] > config['max-temperature']:
-                    diff1 = data["MAX(HUMIDITY)"][i] - config['max-humidity']
-                    diff2 = data["MAX(TEMP)"][i] - config['max-temperature']
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C above maximum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% above maximum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-            elif data["MIN(TEMP)"][i] < config['min-temperature']:
-                if data["MIN(HUMIDITY)"][i] < config['min-humidity']:
-                    diff1 = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
-                    diff2 = config['min-temperature'] - data["MIN(TEMP)"][i]
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C below minimum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% below minimum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-                elif data["MAX(HUMIDITY)"][i] > config['max-humidity']:
-                    diff1 = data["MAX(HUMIDITY)"][i] - config['max-humidity']
-                    diff2 = config['min-temperature'] - data["MIN(TEMP)"][i]
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C below minimum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% above maximum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-            elif data["MAX(TEMP)"][i] > config['max-temperature']:
-                if data["MIN(HUMIDITY)"][i] < config['min-humidity']:
-                    diff1 = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
-                    diff2 = data["MAX(TEMP)"][i] - config['max-temperature']
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C above maximum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% below minimum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-                elif data["MAX(TEMP)"][i] > config['max-temperature']:
-                    diff1 = data["MAX(HUMIDITY)"][i] - config['max-humidity']
-                    diff2 = data["MAX(TEMP)"][i] - config['max-temperature']
-                    comment = "BAD: " + str(round(diff2, 2))
-                    comment = comment + " *C above maximum temperature; "
-                    comment = comment + str(round(diff1, 2))
-                    comment = comment + "% above maximum humidity"
-                    csv_content.append([data["DATE"][i], comment])
-                    df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                    df.to_csv("report.csv", index=False)
-
-            elif data["MAX(HUMIDITY)"][i] > config['max-humidity']:
-                diff = data["MAX(HUMIDITY)"][i] - config['max-humidity']
-                comment = "BAD: " + str(round(diff, 2))
-                comment = comment + "% above maximum humidity"
-                csv_content.append([data["DATE"][i], comment])
-                df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                df.to_csv("report.csv", index=False)
-
-            elif data["MIN(HUMIDITY)"][i] < config['min-humidity']:
-                diff = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
-                comment = "BAD: " + str(round(diff, 2))
-                comment = comment + "% below minimum humidity"
-                csv_content.append([data["DATE"][i], comment])
-                df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                df.to_csv("report.csv", index=False)
-
-            elif data["MIN(TEMP)"][i] < config['min-temperature']:
+            comment = "OK"
+            if data["MIN(TEMP)"][i] < config['min-temperature']:
                 diff = config['min-temperature'] - data["MIN(TEMP)"][i]
-                comment = "BAD: " + str(round(diff, 2))
-                comment = comment + " *C below minimum temperature"
-                csv_content.append([data["DATE"][i], comment])
-                df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                df.to_csv("report.csv", index=False)
+                if len(comment) == 0:
+                    comment = str(round(diff, 2))
+                    comment = comment + " *C below minimum temperature"
+                else:
+                    comment = comment + "; " + str(round(diff, 2))
+                    comment = comment + " *C below minimum temperature"
 
-            elif data["MAX(TEMP)"][i] > config['max-temperature']:
+            if data["MAX(TEMP)"][i] > config['max-temperature']:
                 diff = data["MAX(TEMP)"][i] - config['max-temperature']
-                comment = "BAD: " + str(round(diff, 2))
-                comment = comment + " *C above maximum temperature"
-                csv_content.append([data["DATE"][i], comment])
-                df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                df.to_csv("report.csv", index=False)
+                if len(comment) == 0:
+                    comment = str(round(diff, 2))
+                    comment = comment + " *C above maximum temperature"
+                else:
+                    comment = comment + "; " + str(round(diff, 2))
+                    comment = comment + " *C above maximum temperature"
 
-            else:
-                csv_content.append([data["DATE"][i], "OK"])
-                df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
-                df.to_csv("report.csv", index=False)
+            if data["MIN(HUMIDITY)"][i] < config['min-humidity']:
+                diff = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
+                if len(comment) == 0:
+                    comment = str(round(diff, 2))
+                    comment = comment + "% below minimum humidity"
+                else:
+                    comment = comment + "; " + str(round(diff, 2))
+                    comment = comment + "% below minimum humidity"
+
+            if data["MAX(HUMIDITY)"][i] > config['max-humidity']:
+                diff = data["MAX(HUMIDITY)"][i] - config['max-humidity']
+                if len(comment) == 0:
+                    comment = str(round(diff, 2))
+                    comment = comment + "% above maximum humidity"
+
+                else:
+                    comment = comment + "; " + str(round(diff, 2))
+                    comment = comment + "% above maximum humidity"
+
+            csv_content.append([data["DATE"][i], comment])
+            df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
+            df.to_csv("report.csv", index=False)
 
 # Created object to call create_csv
 cr = createReport()
