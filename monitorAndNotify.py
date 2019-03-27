@@ -1,3 +1,5 @@
+# File which contains the main method
+
 # Imported the necessary module
 from database import database
 
