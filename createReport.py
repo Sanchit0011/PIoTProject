@@ -38,45 +38,54 @@ class createReport:
         # Looped through dataframe and checked if readings are out of range
         # Created csv file based on readings status
         for i in range(0, len(data)):
-            comment = "OK"
+            comment = ""
+            status = "OK"
             if data["MIN(TEMP)"][i] < config['min-temperature']:
                 diff = config['min-temperature'] - data["MIN(TEMP)"][i]
                 if len(comment) == 0:
+                    status = "BAD: "
                     comment = str(round(diff, 2))
                     comment = comment + " *C below minimum temperature"
                 else:
+                    status = "BAD: "
                     comment = comment + "; " + str(round(diff, 2))
                     comment = comment + " *C below minimum temperature"
 
             if data["MAX(TEMP)"][i] > config['max-temperature']:
                 diff = data["MAX(TEMP)"][i] - config['max-temperature']
                 if len(comment) == 0:
+                    status = "BAD: "
                     comment = str(round(diff, 2))
                     comment = comment + " *C above maximum temperature"
                 else:
+                    status = "BAD: "
                     comment = comment + "; " + str(round(diff, 2))
                     comment = comment + " *C above maximum temperature"
 
             if data["MIN(HUMIDITY)"][i] < config['min-humidity']:
                 diff = config['min-humidity'] - data["MIN(HUMIDITY)"][i]
                 if len(comment) == 0:
+                    status = "BAD: "
                     comment = str(round(diff, 2))
                     comment = comment + "% below minimum humidity"
                 else:
+                    status = "BAD: "
                     comment = comment + "; " + str(round(diff, 2))
                     comment = comment + "% below minimum humidity"
 
             if data["MAX(HUMIDITY)"][i] > config['max-humidity']:
                 diff = data["MAX(HUMIDITY)"][i] - config['max-humidity']
                 if len(comment) == 0:
+                    status = "BAD: "
                     comment = str(round(diff, 2))
                     comment = comment + "% above maximum humidity"
 
                 else:
+                    status = "BAD: "
                     comment = comment + "; " + str(round(diff, 2))
                     comment = comment + "% above maximum humidity"
 
-            csv_content.append([data["DATE"][i], comment])
+            csv_content.append([data["DATE"][i], status + comment])
             df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
             df.to_csv("report.csv", index=False)
 
