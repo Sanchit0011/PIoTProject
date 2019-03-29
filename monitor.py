@@ -43,6 +43,3 @@ class monitor:
         temp_cpu = self.get_cpu_temp()
         temp_acc = temp - ((temp_cpu-temp)/1.5)
         return(temp_acc)
-
-m = monitor()
-m.getTime()
