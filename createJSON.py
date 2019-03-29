@@ -13,8 +13,8 @@ class createJSON:
     ranges = {
         "min-temperature": 20,
         "max-temperature": 30,
-        "min-humidity": 40,
-        "max-humidity": 50
+        "min-humidity": 30,
+        "max-humidity": 40
 
         }
 
