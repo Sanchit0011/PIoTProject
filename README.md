@@ -1,5 +1,5 @@
 # PIoTAssignment
-##Files
+## Files:
 - config.json:
 - createJSON.py:
 - createReport.py:
