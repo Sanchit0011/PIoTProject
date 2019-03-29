@@ -1,9 +1,6 @@
-# The file contains code to get current temp, humidity, time
-
-# Imported the necessary modules
 import os
-from datetime import datetime
 from sense_hat import SenseHat
+from datetime import datetime
 
 # Defined monitor class
 
@@ -16,10 +13,22 @@ class monitor:
         humidity = sense.get_humidity()
         return(humidity)
 
+    # Function to get current date
+    def getDate(self):
+        sense = SenseHat()
+        dateobj = datetime.now()
+        year = dateobj.year
+        month = dateobj.month
+        day = dateobj.day
+        date = str(year) + "-" + str(month) + "-" + str(day)
+        return(date)
+
     # Function to get current time
     def getTime(self):
-        date = datetime.now()
-        return(date)
+        sense = SenseHat()
+        dateobj = datetime.now()
+        time = str(dateobj.hour) + ":" + str(dateobj.minute)
+        return(time)
 
     # Function to get current cpu temperature
     def get_cpu_temp(self):
@@ -34,3 +43,6 @@ class monitor:
         temp_cpu = self.get_cpu_temp()
         temp_acc = temp - ((temp_cpu-temp)/1.5)
         return(temp_acc)
+
+m = monitor()
+m.getTime()
