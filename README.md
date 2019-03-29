@@ -13,3 +13,7 @@
 - [getting the accurate temperature] (yaab-arduino.blogspot.com/2016/08/accurate-temperature-reading-sensehat.html) 
 - [Pushbullet:] (https://github.com/Azelphur/pyPushBullet)
 - [Bluetooth:] (https://github.com/karulis/pybluez) 
+
+## Group Members:
+- Sanchit Sharma: s3695622
+- Deepika Gill: s3698341
