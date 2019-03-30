@@ -1,5 +1,6 @@
 # File to get current time, date, temp and humidity
 
+# Imported the necessary modules
 import os
 from sense_hat import SenseHat
 from datetime import datetime
