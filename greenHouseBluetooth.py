@@ -1,27 +1,30 @@
 import subprocess as sp
 import os
 import bluetooth
+from pushbullet.pushbullet import PushBullet
 
 class greenHouseBluetooth:
     
     def scanDevices(self):
         nearby_devices = bluetooth.discover_devices(lookup_names=True)
-        print("found %d devices" % len(nearby_devices))
+        #print(nearby_devices)
         
-        for addr, name in nearby_devices:
-            print("  %s - %s" % (addr, name))
+        #print("found %d devices" % len(nearby_devices))
+        
+        #for addr, name in nearby_devices:
+           # print("  %s - %s" % (addr, name))
             
-    
-    def listPairedDevices(self):
-        p = sp.Popen(["bt-device", "--list"], stdin = sp.PIPE, stdout = sp.PIPE, close_fds = True)
-        (stdout, stdin) = (p.stdout, p.stdin)
-        data = stdout.readlines()
-        print(data)
         
-    # def sendPushNotification:
+    #def sendPushNotification(self):
+        apiKey = "o.yVczv6qpQuZIKF8zaPImpIxIxw0evUIp"
+        p = PushBullet(apiKey)
         
-    
-    
+        # Getting a list of devices
+        pushbulletDevices = p.getDevices()
+        print(nearby_devices)
+            if pushbulletDevices[0].get("nickname") in nearby_devices:
+                print("Found device with names: ", nearby_devices)
+                p.pushNote(devices[0]["iden"], 'Raspberry-Pi-Notification','')
+
 device = greenHouseBluetooth()
 device.scanDevices()
-device.listPairedDevices()
