@@ -7,6 +7,7 @@ import sqlite3
 import os
 from database import database
 from monitor import monitor
+from datetime import datetime
 
 # Defined createReport class
 
@@ -26,8 +27,14 @@ class createReport:
         rel_path = path1.replace(path2, "")
 
         # Loaded config.json file
-        with open(rel_path + 'config.json', 'r') as f:
-            config = json.load(f)
+        try:
+            with open(rel_path + 'config.json', 'r') as f:
+                config = json.load(f)
+        except:
+            with open(rel_path + 'log.txt', 'a+') as f:
+                date_time = (str(datetime.now()).split('.'))[0]
+                f.write(date_time + " " + "Failed to load config.json\n")
+                exit()
 
         # Got min, max temp, humidity from database and stored in dataframe
         data = pd.read_sql_query('''SELECT DATE, MIN(TEMP), MAX(TEMP), MIN(HUMIDITY),
@@ -36,7 +43,6 @@ class createReport:
         csv_content = []
 
         # Looped through dataframe and checked if readings are out of range
-        # Created csv file based on readings status
         for i in range(0, len(data)):
             comment = ""
             status = "OK"
@@ -85,6 +91,7 @@ class createReport:
                     comment = comment + "; " + str(round(diff, 2))
                     comment = comment + "% above maximum humidity"
 
+            # Created csv file based on readings status
             csv_content.append([data["DATE"][i], status + comment])
             df = pd.DataFrame(csv_content, columns=['DATE', 'STATUS'])
             df.to_csv("report.csv", index=False)
