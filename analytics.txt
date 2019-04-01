@@ -1,1 +1,13 @@
+- With the data that you have, what kind of data visualisation graph should be used?
+We have used scatter plots and bar charts to visualize the data we had. 
+  - Scatter Plot: We used scatter plot to determine the relationship between the temperature and humidity during certain times of the day, since both the variables being depicted are numerical and we are trying to determine a corelation between them, scatter plot was the best choice in this case.
+  - Bar Chart: We used bar charts to determine the maximum and minimum humidity and temperature ranges per day, here we are mapping the changes in humidity and temperature with each passing day, therefore bar chart was the best choice in this case.
 
+- What should be represented in the above graph? Why did you make that decision?
+Since, the application we developed is a green house monitor. we represented the changes in humidity and temperature with time and days so that the changes can be understood and then maintained. 
+
+- Python supports numerous data visualisation libraries. Which two libraries did you narrow it down to?
+  - Seaborn
+  - Pygal
+  
+- Analytical comparison of the libraries 
