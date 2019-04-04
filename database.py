@@ -4,7 +4,7 @@
 import os
 import sqlite3
 from monitor import monitor
-from notifyPushbullet import notifyPushbullet
+import notifyPushbullet
 
 # Defined database class
 
@@ -36,7 +36,7 @@ class database:
     def insert_table(self):
         conn = self.create_conn()
         mon = monitor()
-        npb = notifyPushbullet()
+        npb = notifyPushbullet.notifyPushbullet()
         notified = npb.notify()
         temp = round(npb.temperature, 2)
         humid = round(npb.humidity, 2)
