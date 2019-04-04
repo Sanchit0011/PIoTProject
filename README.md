@@ -1,7 +1,7 @@
 # Green House Monitor
 
 ## Files listed in the Assignment:
-- config.json: The file includes the maximum and minimum threshold limits for temperature and humidity.
+- _config.json_: The file includes the maximum and minimum threshold limits for temperature and humidity.
 - createJSON.py: The file contains python code that was used to create the 'config.json' file.
 - createReport.py: The file contains code to create the .csv file which contains a separate row for each day's data. This data also resides in the database. If each piece of data is within the configured temperature and humidity range then the status of OK is applied, otherwise the label of BAD is applied.
 - database.py: The file contains code to create a table in the database if it doesn't already exist and then the data read from the sense hat (temperature and humidity) is inserted into the database.
