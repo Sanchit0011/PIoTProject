@@ -33,7 +33,7 @@ class analytics:
         s_bar.add('Max-Temperature', data['MAX(TEMP)'])
         s_bar.add('Min-Humidity', data['MIN(HUMIDITY)'])
         s_bar.add('Max-Humidity', data['MAX(HUMIDITY)'])
-        s_bar.render_to_png('test.png')
+        s_bar.render_to_png('temphumidbar.png')
 
     # Function to create scatter plot
     def create_scatter_plot(self):
