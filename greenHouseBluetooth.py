@@ -152,7 +152,15 @@ class greenHouseBluetooth:
                         comment = 'The temperature is ' + str(round(range, 2))
                         comment = comment + ' degrees higher than the limit'
                         p.pushNote(devices[0]["iden"], 'Bluetooth', comment)
-
+                
+                else:
+                    comment = 'The temperature is ' + str(round(self.temp, 2)) + ' degrees'
+                    comment = comment + ' and the humidity is ' + str(round(self.humid,2)) 
+                    comment = comment + '%'
+                    p.pushNote(devices[0]["iden"], 'Bluetooth', comment)
+                
+                    
+                    
                 i = 10
             # If the device is not found
             else:
