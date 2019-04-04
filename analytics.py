@@ -14,7 +14,7 @@ from matplotlib.lines import Line2D
 
 class analytics:
 
-# Function to create bar chart
+    # Function to create bar chart
     def create_bar_chart(self):
 
         # Connected to the database
@@ -38,7 +38,3 @@ class analytics:
 # Created object to create visualizations
 viz = analytics()
 viz.create_bar_chart()
-
-
-
-
