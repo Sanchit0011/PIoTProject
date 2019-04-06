@@ -11,4 +11,9 @@ A: - Seaborn
   - Pygal
   
 Q: Analytical comparison of the libraries
-A:  
+A:  We chose seaborn and pygal from the numerous data visualisation libraries supported by Python. The primary reason for choosing these librabries was the documentation and support available.
+Pygal - Barchart
+Pygal is easy to implement and creates visually appealing charts with just a few lines of code. It is a good choice in case of smaller datasets such as in our case. Moreover, it is an open source free library and is widely used because of its customisation options and simplicity.
+
+Seaborn - Scatterplot
+Seaborn is built upon Matplotlib, it styles and color palettes are more sophisticated compared to Matplotlib. It's a higher-level library, therefore it's easier to generate certain kind of plots such as scatterplots. It also offers variety of styles for the colors which makes the plots generated even more appealing.
