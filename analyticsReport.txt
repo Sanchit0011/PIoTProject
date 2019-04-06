@@ -4,7 +4,7 @@ A: We have used scatter plots and bar charts to visualize the data we had.
   - Bar Chart: We used bar charts to determine the maximum and minimum humidity and temperature ranges per day, here we are mapping the changes in humidity and temperature with each passing day, therefore bar chart was the best choice in this case.
 
 Q: What should be represented in the above graph? Why did you make that decision?
-A: Since, the application we developed is a green house monitor. we represented the changes in humidity and temperature with time and days so that the changes can be understood and then maintained. 
+A: Since, the application we developed is a green house monitor, we represented the changes in humidity and temperature with time and days so that the changes can be understood and then maintained. 
 
 Q:Python supports numerous data visualisation libraries. Which two libraries did you narrow it down to?
 A: - Seaborn
